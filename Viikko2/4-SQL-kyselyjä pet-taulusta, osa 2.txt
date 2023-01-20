@@ -1,0 +1,72 @@
+a)	mysql> select owner from pet;
+	+--------+
+	| owner  |
+	+--------+
+	| Harold |
+	| Gwen   |
+	| Harold |
+	| Benny  |
+	| Diane  |
+	| Gwen   |
+	| Gwen   |
+	| Benny  |
+	+--------+
+	8 rows in set (0.00 sec)
+	
+b)	mysql> select name from pet order by name;
+	+----------+
+	| name     |
+	+----------+
+	| Bowser   |
+	| Buffy    |
+	| Chirpy   |
+	| Claws    |
+	| Fang     |
+	| Fluffy   |
+	| Slim     |
+	| Whistler |
+	+----------+
+	8 rows in set (0.00 sec)
+	
+c)	mysql> select name from pet where death is NULL;
+	+----------+
+	| name     |
+	+----------+
+	| Fluffy   |
+	| Claws    |
+	| Buffy    |
+	| Fang     |
+	| Whistler |
+	| Slim     |
+	+----------+
+	6 rows in set (0.00 sec)
+	
+d)	mysql> select owner from pet where owner like 'H%';
+	+--------+
+	| owner  |
+	+--------+
+	| Harold |
+	| Harold |
+	+--------+
+	2 rows in set (0.01 sec)
+	
+e)	mysql> select name from pet where name like '%ff%';
+	+--------+
+	| name   |
+	+--------+
+	| Fluffy |
+	| Buffy  |
+	+--------+
+	2 rows in set (0.00 sec)
+	
+f)	mysql> select name from pet where name like '____';
+	+------+
+	| name |
+	+------+
+	| Fang |
+	| Slim |
+	+------+
+	2 rows in set (0.00 sec)
+	
+	
+	
