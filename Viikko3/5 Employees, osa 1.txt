@@ -1,0 +1,51 @@
+a)	mysql> select * from departments;
+	
+b)	mysql> select distinct title from titles;
+	
+c)	mysql> select MIN(salary), MAX(salary) from salaries;
+	+-------------+-------------+
+	| MIN(salary) | MAX(salary) |
+	+-------------+-------------+
+	|       38623 |      158220 |
+	+-------------+-------------+
+	1 row in set (1.52 sec)
+
+d)	mysql> select AVG(salary) from salaries;
+	+-------------+
+	| AVG(salary) |
+	+-------------+
+	|  63810.7448 |
+	+-------------+
+	1 row in set (1.72 sec)
+		
+e)	mysql> select first_name, last_name from employees where last_name = 'Facello';
+	
+f)	mysql> select * from employees where birth_date between '1950-01-01' and '1959-12-31';
+	
+g)	mmysql> select count(*), gender from employees group by gender;
+	+----------+--------+
+	| count(*) | gender |
+	+----------+--------+
+	|   179973 | M      |
+	|   120051 | F      |
+	+----------+--------+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+	
+	
+	

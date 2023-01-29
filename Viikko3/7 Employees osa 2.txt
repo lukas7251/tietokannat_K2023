@@ -1,0 +1,71 @@
+a)	mysql> select last_name from employees order by last_name limit 10;
+	
+b)	mysql> select last_name, first_name from employees order by last_name, first_name limit 10;
+	
+c)	mysql> select * from employees where hire_date order by hire_date desc limit 5;
+	
+d)	mysql> select first_name, last_name, salary from employees join salaries on employees.emp_no = salaries.emp_no order by salary desc limit 1;	
+	+------------+-----------+--------+	
+	| first_name | last_name | salary |	
+	+------------+-----------+--------+	
+	| Tokuyasu   | Pesch     | 158220 |	
+	+------------+-----------+--------+	
+
+e)	mysql> select first_name, last_name, salary from employees join salaries on employees.emp_no = salaries.emp_no order by salary asc limit 1;
+	+------------+-----------+--------+
+	| first_name | last_name | salary |
+	+------------+-----------+--------+
+	| Olivera    | Baek      |  38623 |
+	+------------+-----------+--------+
+
+f)	mysql> select first_name, last_name, salary from employees join salaries on employees.emp_no = salaries.emp_no where salary > 150000;	
+
+g)	mysql> SELECT departments.dept_no, count(current_dept_emp.dept_no) FROM current_dept_emp JOIN departments ON departments.dept_no = 	 	current_dept_emp.dept_no WHERE departments.dept_no ='d007' OR departments.dept_no ='d001' GROUP BY departments.dept_no;
+	+---------+---------------------------------+
+	| dept_no | count(current_dept_emp.dept_no) |
+	+---------+---------------------------------+
+	| d007    |                           46922 |
+	| d001    |                           18426 |
+	+---------+---------------------------------+
+
+h)	mysql> select employees.first_name, employees.last_name, dept_manager.dept_no from dept_manager join employees on dept_manager.emp_no = 		employees.emp_no;
+	+-------------+--------------+---------+
+	| first_name  | last_name    | dept_no |
+	+-------------+--------------+---------+
+	| Margareta   | Markovitch   | d001    |
+	| Vishwani    | Minakawa     | d001    |
+			.
+			.
+			.
+	| Xiaobin     | Spinelli     | d009    |
+	| Yuchang     | Weedman      | d009    |
+	+-------------+--------------+---------+
+
+
+i)	mysql> select avg(salary) from salaries join current_Dept_emp on current_Dept_emp.emp_no = salaries.emp_no where dept_no = 'd007' or dept_no = 		'd001';	
+	+-------------+	
+	| avg(salary) |	
+	+-------------+	
+	|  78214.1802 |
+	+-------------+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

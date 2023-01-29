@@ -1,0 +1,99 @@
+a)	mysql> select name from language order by name asc;
+	+----------+
+	| name     |
+	+----------+
+	| English  |
+	| French   |
+	| German   |
+	| Italian  |
+	| Japanese |
+	| Mandarin |
+	+----------+
+	
+b)	mysql> select film.title from film
+	    -> join film_actor ON film.film_id = film_actor.film_id
+	    -> join actor ON film_actor.actor_id = actor.actor_id
+	    -> where actor.last_name = 'Temple';
+	+-------------------------+
+	| title                   |
+	+-------------------------+
+	| ACADEMY DINOSAUR        |
+	| ALABAMA DEVIL           |
+	| BALLOON HOMEWARD        |
+		...
+	
+c)	mysql> select actor.first_name, actor.last_name from actor
+	    -> join film_actor ON actor.actor_id = film_actor.actor_id
+	    -> join film ON film_actor.film_id = film.film_id
+	    -> where film.title = 'Ghost Groundhog';
+	+------------+-----------+
+	| first_name | last_name |
+	+------------+-----------+
+	| DAN        | HARRIS    |
+	| KENNETH    | TORN      |
+	| KEVIN      | GARLAND   |
+	| RUSSELL    | TEMPLE    |
+	| RENEE      | BALL      |
+	+------------+-----------+
+	
+	
+d)	mysql> select COUNT(*) from film
+	    -> join film_category ON film.film_id = film_category.film_id
+	    -> join category ON film_category.category_id = category.category_id
+	    -> where category.name = 'Horror';
+	+----------+
+	| COUNT(*) |
+	+----------+
+	|       56 |
+	+----------+
+	
+e)	mysql> SELECT film.title
+	    -> from film
+	    -> join film_category ON film.film_id = film_category.film_id
+	    -> join category ON film_category.category_id = category.category_id
+	    -> where category.name = 'Horror';
+	+-----------------------------+
+	| title                       |
+	+-----------------------------+
+	| ACE GOLDFINGER              |
+	| AFFAIR PREJUDICE            |
+	| AIRPORT POLLOCK             |
+		...
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
