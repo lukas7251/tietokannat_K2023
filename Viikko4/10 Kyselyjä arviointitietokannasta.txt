@@ -1,0 +1,55 @@
+1)	mysql> select etunimi,sukunimi,arvosana from opiskelija join arviointi on arviointi.idOpiskelija = opiskelija.idOpiskelija where arvosana = '0';
+	+---------+----------+----------+
+	| etunimi | sukunimi | arvosana |
+	+---------+----------+----------+
+	| Aku     | Ankka    |        0 |
+	+---------+----------+----------+
+	1 row in set (0.00 sec)
+	
+2)	mysql> select etunimi,sukunimi,arvosana from opiskelija join arviointi on arviointi.idOpiskelija = opiskelija.idOpiskelija and idOpintojakso = '3' and arvosana > 0;
+	+---------+----------+----------+
+	| etunimi | sukunimi | arvosana |
+	+---------+----------+----------+
+	| Aku     | Ankka    |        1 |
+	| Roope   | Ankka    |        4 |
+	| Iines   | Ankka    |        4 |
+	| Mikki   | Hiiri    |        5 |
+	| Hessu   | Hopo     |        1 |
+	+---------+----------+----------+
+	5 rows in set (0.00 sec)
+	
+3)	mysql> select etunimi, nimi from opiskelija
+	    -> join arviointi on arviointi.idOpiskelija = opiskelija.idOpiskelija
+	    -> join opintojakso on opintojakso.idOpintojakso = arviointi.idOpintojakso
+	    -> where arviointi.idOpiskelija = '5';
+	+---------+-------------+
+	| etunimi | nimi        |
+	+---------+-------------+
+	| Hessu   | Tietokannat |
+	| Hessu   | Fysiikka3   |
+	+---------+-------------+
+	2 rows in set (0.00 sec)
+	
+4)	mysql> select etunimi, avg(arvosana) from opiskelija
+	    -> join arviointi on opiskelija.idOpiskelija = arviointi.idOpiskelija
+	    -> where etunimi = 'Aku';
+	+---------+---------------+
+	| etunimi | avg(arvosana) |
+	+---------+---------------+
+	| Aku     |        0.6667 |
+	+---------+---------------+
+	1 row in set (0.00 sec)
+	
+5)	mysql> select nimi, opintojakso.idOpintojakso from opintojakso
+	    -> left join arviointi on arviointi.idOpintojakso = opintojakso.idOpintojakso
+	    -> where arviointi.idOpintojakso is null;
+	+-------------------------+---------------+
+	| nimi                    | idOpintojakso |
+	+-------------------------+---------------+
+	| Liike-elman tapatietous |             4 |
+	| Elektroniikan perusteet |             6 |
+	| Kellarihumppa           |             7 |
+	| Matematiikka            |             8 |
+	| VHDL-kieli              |            10 |
+	+-------------------------+---------------+
+	5 rows in set (0.00 sec)
