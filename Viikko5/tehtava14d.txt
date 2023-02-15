@@ -1,0 +1,76 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LisaaSuoritus`(
+IN En VARCHAR(45),
+IN Sn VARCHAR(45),
+IN KK VARCHAR(45),
+IN Arvos INT)
+Aliohjelma:BEGIN
+
+DECLARE OpiskID INT DEFAULT 0;
+DECLARE OpjaksoID INT DEFAULT 0;
+
+SELECT idOpiskelija INTO OpiskID FROM Opiskelija
+WHERE Etunimi=En AND Sukunimi=Sn;
+
+IF OpiskID=0 THEN
+    SELECT 'Opiskelijaa ei ole'; -- Tulostetaan viesti käyttäjälle
+    LEAVE Aliohjelma;
+END IF;
+
+SELECT Arvosana INTO Arvos FROM Arviointi
+WHERE Arvosana = Arvos;
+
+IF Arvos < 0 OR Arvos > 5 THEN
+    SELECT 'Arvosana ei ole kelvollinen';
+    LEAVE Aliohjelma;
+END IF;
+
+SELECT idOpintojakso INTO OpjaksoID FROM Opintojakso
+WHERE Koodi = KK;
+
+IF OpjaksoID = 0 THEN
+    SELECT 'Opintojaksoa ei ole'; -- Tulostetaan viesti käyttäjälle
+    LEAVE Aliohjelma;
+END IF;
+
+INSERT INTO Arviointi(Paivamaara, Arvosana, idOpiskelija, idOpintojakso)
+VALUES(CURDATE(), Arvos, OpiskID, OpjaksoID);
+
+END
+
+
+
+
+
+mysql> CALL LisaaSuoritus('Roope','Ankka','T20041',4);
+
+mysql> select arvosana,arviointi.idopiskelija,etunimi,sukunimi from arviointi join opiskelija on opiskelija.idOpiskelija=arviointi.idopiskelija;
++----------+--------------+---------+----------+
+| arvosana | idopiskelija | etunimi | sukunimi |
++----------+--------------+---------+----------+
+|        4 |            3 | Iines   | Ankka    |
++----------+--------------+---------+----------+
+
+
+Virheelliset syötteet:
+
+mysql> CALL LisaaSuoritus('Iines','Hiiri','T20042',5);
++--------------------+
+| Opiskelijaa ei ole |
++--------------------+
+| Opiskelijaa ei ole |
++--------------------+
+
+mysql> CALL LisaaSuoritus('Iines','Ankka','T12345',3);
++---------------------+
+| Opintojaksoa ei ole |
++---------------------+
+| Opintojaksoa ei ole |
++---------------------+
+
+mysql> CALL LisaaSuoritus('Iines','Ankka','T1234',6);
++-----------------------------+
+| Arvosana ei ole kelvollinen |
++-----------------------------+
+| Arvosana ei ole kelvollinen |
++-----------------------------+
+
